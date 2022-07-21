@@ -1745,6 +1745,7 @@ static void update_history(struct rq *rq, struct task_struct *p,
 
 	if (sched_window_stats_policy == WINDOW_STATS_RECENT) {
 		demand = runtime;
+		irq_work_queue(&walt_cpufreq_irq_work);
 	} else if (sched_window_stats_policy == WINDOW_STATS_MAX) {
 		demand = max;
 	} else {
