@@ -91,6 +91,9 @@ function question() {
 
 # Detect OS
 function check_os() {
+	if [ -f /etc/manjaro-release ]; then
+		manjaro=true
+	fi
 	if [ -f /etc/SUSE-brand ]; then
 		suse=true
 	fi
@@ -237,6 +240,11 @@ function get_dependencies() {
 		for i in $SUSE_DEPEND;
        		do
                		sudo zypper in -y $i
+       		done
+       	elif [ "$manjaro" = true ]; then
+		for i in $MANJARO_DEPEND;
+       		do
+               		sudo pacman -Sy $i
        		done
 	else
         	sudo apt-get update
